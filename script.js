@@ -411,10 +411,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Modal close handlers
     closeBtn?.addEventListener('click', function() {
         modal.style.display = 'none';
+        // 모달 닫을 때 폼 리셋
+        if (orderForm) {
+            orderForm.reset();
+        }
+        const priceDisplayElement = document.querySelector('.price-amount');
+        if (priceDisplayElement) {
+            priceDisplayElement.textContent = '₩0';
+        }
     });
 
     cancelBtn?.addEventListener('click', function() {
         modal.style.display = 'none';
+        // 모달 닫을 때 폼 리셋
+        if (orderForm) {
+            orderForm.reset();
+        }
+        const priceDisplayElement = document.querySelector('.price-amount');
+        if (priceDisplayElement) {
+            priceDisplayElement.textContent = '₩0';
+        }
     });
 
     // Copy account number
@@ -433,30 +449,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Confirm payment
     confirmBtn?.addEventListener('click', async function() {
-        modal.style.display = 'none';
+        // 모달을 닫지 않음 - 계좌번호 계속 표시
+        // modal.style.display = 'none';
 
         if (window.currentOrderData) {
             console.log('주문 데이터:', window.currentOrderData);
+
+            // 성공 메시지 표시
+            showNotification('주문이 접수되었습니다! 입금 확인 후 자동으로 작업이 시작됩니다.', 'success');
 
             if (window.telegramNotifier) {
                 try {
                     const success = await window.telegramNotifier.sendOrderNotification(window.currentOrderData);
                     if (success) {
-                        showNotification('주문이 접수되었습니다! 입금 확인 후 자동으로 작업이 시작됩니다.', 'success');
-                    } else {
-                        showNotification('주문이 접수되었습니다! 입금 확인 후 작업이 시작됩니다.', 'success');
+                        console.log('텔레그램 알림 전송 성공');
                     }
                 } catch (error) {
                     console.error('텔레그램 알림 전송 오류:', error);
-                    showNotification('주문이 접수되었습니다! 입금 확인 후 작업이 시작됩니다.', 'success');
                 }
-            } else {
-                showNotification('주문이 접수되었습니다! 입금 확인 후 자동으로 작업이 시작됩니다.', 'success');
             }
 
-            // Reset form
-            orderForm.reset();
-            priceDisplay.textContent = '₩0';
+            // 버튼 텍스트 변경
+            confirmBtn.innerHTML = '<i class="fas fa-check"></i> 주문 접수 완료';
+            confirmBtn.disabled = true;
+
+            // 3초 후 버튼 원상복구
+            setTimeout(() => {
+                confirmBtn.innerHTML = '입금 완료';
+                confirmBtn.disabled = false;
+            }, 3000);
+
+            // 폼 리셋은 모달을 닫을 때 실행
+            // orderForm.reset();
+            // priceDisplay.textContent = '₩0';
         }
     });
 
@@ -464,6 +489,14 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('click', function(event) {
         if (event.target == modal) {
             modal.style.display = 'none';
+            // 모달 닫을 때 폼 리셋
+            if (orderForm) {
+                orderForm.reset();
+            }
+            const priceDisplayElement = document.querySelector('.price-amount');
+            if (priceDisplayElement) {
+                priceDisplayElement.textContent = '₩0';
+            }
         }
     });
 
