@@ -1,26 +1,23 @@
 class TelegramNotifier {
-    constructor(token, chatId) {
-        this.token = token;
-        this.chatId = chatId;
-        this.apiUrl = `https://api.telegram.org/bot${token}`;
+    constructor() {
+        // Vercel API 엔드포인트 URL (배포 후 실제 URL로 변경 필요)
+        this.apiUrl = '/api/telegram'; // Vercel 배포 시 자동으로 라우팅됨
     }
 
     async sendMessage(message) {
         try {
-            const response = await fetch(`${this.apiUrl}/sendMessage`, {
+            const response = await fetch(this.apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    chat_id: this.chatId,
-                    text: message,
-                    parse_mode: 'HTML'
+                    message: message
                 })
             });
 
             const result = await response.json();
-            if (result.ok) {
+            if (result.success) {
                 console.log('메시지 전송 성공:', result);
                 return true;
             } else {
@@ -51,6 +48,6 @@ class TelegramNotifier {
     }
 }
 
-const telegramNotifier = new TelegramNotifier('8350395305:AAFKW8BU_nZEKMN1tRjA8SyqTq5ZSHUwTtQ', '455532741');
+const telegramNotifier = new TelegramNotifier();
 
 window.telegramNotifier = telegramNotifier;
