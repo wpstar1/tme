@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeleBoost Pro - 텔레그램 SMM 패널</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fab fa-telegram"></i>
+                <span>TeleBoost Pro</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">홈</a></li>
+                <li><a href="#services">서비스</a></li>
+                <li><a href="#order">빠른 주문</a></li>
+                <li><a href="#dashboard">대시보드</a></li>
+                <li><a href="#contact">문의</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    텔레그램 채널을 <span class="gradient-text">폭발적으로</span> 성장시키세요
+                </h1>
+                <p class="hero-subtitle">
+                    구독자, 조회수, 반응 증가를 위한 최고의 SMM 솔루션
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-lg">
+                        <i class="fas fa-rocket"></i> 지금 시작하기
+                    </button>
+                    <button class="btn btn-outline btn-lg">
+                        <i class="fas fa-play-circle"></i> 데모 보기
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>1M+</h3>
+                        <p>활성 사용자</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50M+</h3>
+                        <p>전송된 메시지</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>99.9%</h3>
+                        <p>서비스 가동률</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="order-form" id="order">
+        <div class="container">
+            <h2 class="section-title">빠른 주문</h2>
+            <div class="form-container">
+                <form class="order-form-content">
+                    <div class="form-group">
+                        <label>서비스 선택</label>
+                        <select class="form-control">
+                            <option>텔레그램 구독자 증가</option>
+                            <option>텔레그램 조회수 증가</option>
+                            <option>텔레그램 랜덤반응 증가</option>
+                            <option>텔레그램 신고[채널/그룹]</option>
+                        </select>
+                    </div>
+                    <div id="report-notice" class="report-notice" style="display: none;">
+                        <span style="font-size: 1.2rem;">🚫</span>
+                        <p>모든 신고는 Telegram Premium 계정을 통해 전송되므로 금지 속도와 성공률이 극대화됩니다.</p>
+                    </div>
+                    <div id="reaction-notice" class="reaction-notice" style="display: none;">
+                        <span style="font-size: 1.2rem;">📱</span>
+                        <div>
+                            <p><strong>사용 가능한 반응 이모지:</strong></p>
+                            <div class="reaction-emojis">
+                                👍 ❤️ 😁 😢 😮 💩 🤮 🔥 🥰 👏 👎 🤬 🤯 🤭 🎉 💯 ⚡
+                            </div>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">무작위로 다양한 반응이 추가됩니다</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>텔레그램 채널/그룹 링크</label>
+                        <input type="text" class="form-control" id="telegram-link" placeholder="https://t.me/yourchannel" required>
+                    </div>
+                    <div class="form-group" id="quantity-input-group">
+                        <label>수량</label>
+                        <input type="number" class="form-control" id="quantity" placeholder="1000" min="1000" required>
+                        <small class="form-hint" id="quantity-hint" style="color: var(--text-secondary); margin-top: 0.5rem; display: block;">최소 주문 수량: 1,000개</small>
+                    </div>
+                    <div class="form-group" id="quantity-select-group" style="display: none;">
+                        <label>수량 선택</label>
+                        <select class="form-control" id="quantity-select">
+                            <option value="">수량을 선택하세요</option>
+                            <option value="1000" data-price="35000">1,000명 - ₩35,000</option>
+                            <option value="2000" data-price="65000">2,000명 - ₩65,000 (7% 할인)</option>
+                            <option value="3000" data-price="93000">3,000명 - ₩93,000 (11% 할인)</option>
+                            <option value="4000" data-price="120000">4,000명 - ₩120,000 (14% 할인)</option>
+                            <option value="5000" data-price="145000">5,000명 - ₩145,000 (17% 할인)</option>
+                            <option value="6000" data-price="168000">6,000명 - ₩168,000 (20% 할인)</option>
+                            <option value="7000" data-price="189000">7,000명 - ₩189,000 (23% 할인)</option>
+                            <option value="8000" data-price="208000">8,000명 - ₩208,000 (26% 할인)</option>
+                            <option value="9000" data-price="225000">9,000명 - ₩225,000 (29% 할인)</option>
+                            <option value="10000" data-price="240000">10,000명 - ₩240,000 (31% 할인)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="report-quantity-select-group" style="display: none;">
+                        <label>신고 수량 선택</label>
+                        <select class="form-control" id="report-quantity-select">
+                            <option value="">신고 수량을 선택하세요</option>
+                            <option value="10" data-price="35000">10개 - ₩35,000</option>
+                            <option value="25" data-price="80000">25개 - ₩80,000 (9% 할인)</option>
+                            <option value="50" data-price="150000">50개 - ₩150,000 (14% 할인)</option>
+                            <option value="100" data-price="280000">100개 - ₩280,000 (20% 할인)</option>
+                            <option value="200" data-price="520000">200개 - ₩520,000 (26% 할인)</option>
+                            <option value="500" data-price="1200000">500개 - ₩1,200,000 (31% 할인)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="view-quantity-select-group" style="display: none;">
+                        <label>조회수 수량 선택</label>
+                        <select class="form-control" id="view-quantity-select">
+                            <option value="">조회수 수량을 선택하세요</option>
+                            <option value="100" data-price="1000">100개 - ₩1,000</option>
+                            <option value="500" data-price="4500">500개 - ₩4,500 (10% 할인)</option>
+                            <option value="1000" data-price="8000">1,000개 - ₩8,000 (20% 할인)</option>
+                            <option value="2000" data-price="15000">2,000개 - ₩15,000 (25% 할인)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="reaction-quantity-select-group" style="display: none;">
+                        <label>랜덤반응 수량 선택</label>
+                        <select class="form-control" id="reaction-quantity-select">
+                            <option value="">반응 수량을 선택하세요</option>
+                            <option value="10" data-price="1000">10개 - ₩1,000</option>
+                            <option value="50" data-price="4500">50개 - ₩4,500 (10% 할인)</option>
+                            <option value="100" data-price="8000">100개 - ₩8,000 (20% 할인)</option>
+                            <option value="500" data-price="35000">500개 - ₩35,000 (30% 할인)</option>
+                            <option value="1000" data-price="65000">1,000개 - ₩65,000 (35% 할인)</option>
+                        </select>
+                    </div>
+                    <div class="service-info" id="service-info" style="display: none;">
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>평균 작업 완료 시간: <strong id="completion-time">12시간</strong></span>
+                        </div>
+                    </div>
+                    <div class="price-display">
+                        <span>예상 금액:</span>
+                        <span class="price-amount">₩0</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">주문하기</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">강력한 텔레그램 마케팅 도구</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>구독자 증가</h3>
+                    <p>실제 활성 사용자들로 채널 구독자를 빠르게 늘려보세요</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> 실제 사용자</li>
+                        <li><i class="fas fa-check"></i> 빠른 전송</li>
+                        <li><i class="fas fa-check"></i> 안전 보장</li>
+                    </ul>
+                    <button class="btn btn-secondary">자세히 보기</button>
+                </div>
+                
+                <div class="service-card featured">
+                    <div class="badge">인기</div>
+                    <div class="service-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>조회수 부스트</h3>
+                    <p>게시물 조회수를 즉시 증가시켜 더 많은 관심을 받으세요</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> 즉시 반영</li>
+                        <li><i class="fas fa-check"></i> 자연스러운 패턴</li>
+                        <li><i class="fas fa-check"></i> 24/7 지원</li>
+                    </ul>
+                    <button class="btn btn-primary">지금 시작</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>반응 & 댓글</h3>
+                    <p>게시물 참여도를 높여 알고리즘 노출을 극대화하세요</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> 다양한 반응</li>
+                        <li><i class="fas fa-check"></i> 맞춤 댓글</li>
+                        <li><i class="fas fa-check"></i> 타겟팅 가능</li>
+                    </ul>
+                    <button class="btn btn-secondary">자세히 보기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="dashboard-preview" id="dashboard">
+        <div class="container">
+            <h2 class="section-title">직관적인 대시보드</h2>
+            <div class="dashboard-content">
+                <div class="dashboard-features">
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>실시간 분석</h4>
+                        <p>채널 성장을 실시간으로 모니터링하고 인사이트를 얻으세요</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>예약 발송</h4>
+                        <p>최적의 시간에 자동으로 캠페인을 실행하세요</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>안전한 서비스</h4>
+                        <p>텔레그램 정책을 준수하는 안전한 성장 전략</p>
+                    </div>
+                </div>
+                <div class="dashboard-mockup">
+                    <div class="mockup-header">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="stat-cards">
+                            <div class="stat-card">
+                                <h5>총 구독자</h5>
+                                <p class="stat-number">125,430</p>
+                                <span class="stat-change positive">+12.5%</span>
+                            </div>
+                            <div class="stat-card">
+                                <h5>주간 조회수</h5>
+                                <p class="stat-number">892,103</p>
+                                <span class="stat-change positive">+28.3%</span>
+                            </div>
+                            <div class="stat-card">
+                                <h5>참여율</h5>
+                                <p class="stat-number">8.7%</p>
+                                <span class="stat-change positive">+3.2%</span>
+                            </div>
+                        </div>
+                        <div class="chart-placeholder">
+                            <div class="chart-bar" style="height: 60%;"></div>
+                            <div class="chart-bar" style="height: 80%;"></div>
+                            <div class="chart-bar" style="height: 45%;"></div>
+                            <div class="chart-bar" style="height: 90%;"></div>
+                            <div class="chart-bar" style="height: 70%;"></div>
+                            <div class="chart-bar" style="height: 85%;"></div>
+                            <div class="chart-bar" style="height: 95%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>TeleBoost Pro</h4>
+                    <p>텔레그램 마케팅의 새로운 기준</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h5>서비스</h5>
+                    <ul>
+                        <li><a href="#">구독자 증가</a></li>
+                        <li><a href="#">조회수 부스트</a></li>
+                        <li><a href="#">반응 & 댓글</a></li>
+                        <li><a href="#">채널 관리</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>회사</h5>
+                    <ul>
+                        <li><a href="#">소개</a></li>
+                        <li><a href="#order">빠른 주문</a></li>
+                        <li><a href="#">블로그</a></li>
+                        <li><a href="#">고객 지원</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>법적 고지</h5>
+                    <ul>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">환불 정책</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TeleBoost Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>주문 확인</h2>
+            <div class="order-summary">
+                <p><strong>서비스:</strong> <span id="modal-service"></span></p>
+                <p><strong>텔레그램 링크:</strong> <span id="modal-link"></span></p>
+                <p><strong>수량:</strong> <span id="modal-quantity"></span></p>
+                <p class="total-amount"><strong>결제 금액:</strong> <span id="modal-amount"></span></p>
+            </div>
+
+            <div class="payment-info">
+                <h3>입금 계좌 정보</h3>
+                <div class="account-box">
+                    <div class="bank-name">카카오뱅크</div>
+                    <div class="account-number">3333335201265</div>
+                    <div class="account-holder">이경형</div>
+                    <button id="copy-account" class="btn btn-secondary">
+                        <i class="fas fa-copy"></i> 계좌번호 복사
+                    </button>
+                </div>
+                <div class="payment-notice">
+                    <i class="fas fa-info-circle"></i>
+                    <p>입금하시면 자동으로 작업이 실행됩니다</p>
+                </div>
+            </div>
+
+            <div class="modal-buttons">
+                <button id="confirm-payment" class="btn btn-primary">입금 완료</button>
+                <button id="cancel-order" class="btn btn-outline">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="telegram-bot.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
