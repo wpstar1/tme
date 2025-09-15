@@ -303,15 +303,20 @@ document.addEventListener('DOMContentLoaded', function() {
         handleServiceChange();
     }
 
-    const orderForm = document.querySelector('.order-form-content');
+    const orderForm = document.querySelector('form.order-form-content');
     const modal = document.getElementById('payment-modal');
     const closeBtn = document.querySelector('.close');
     const copyBtn = document.getElementById('copy-account');
     const confirmBtn = document.getElementById('confirm-payment');
     const cancelBtn = document.getElementById('cancel-order');
 
-    orderForm?.addEventListener('submit', async function(e) {
-        e.preventDefault();
+    // 디버깅용 로그
+    console.log('Order form found:', orderForm);
+
+    if (orderForm) {
+        orderForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            console.log('Form submitted!');
 
         const telegramLink = document.getElementById('telegram-link')?.value;
         const selectedService = serviceSelect?.value;
@@ -373,7 +378,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Store form data for later use
         window.currentOrderData = formData;
-    });
+        });
+    } else {
+        console.error('Order form not found!');
+    }
 
     // Modal close handlers
     closeBtn?.addEventListener('click', function() {
