@@ -312,37 +312,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 디버깅용 로그
     console.log('Order form found:', orderForm);
+    console.log('Modal element:', modal);
+    console.log('Service select:', serviceSelect);
+    console.log('Price display:', priceDisplay);
 
     if (orderForm) {
         orderForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             console.log('Form submitted!');
+            console.log('Event:', e);
 
-        const telegramLink = document.getElementById('telegram-link')?.value;
-        const selectedService = serviceSelect?.value;
-        let quantity;
+        try {
+            const telegramLink = document.getElementById('telegram-link')?.value;
+            const serviceSelectForm = document.querySelector('select.form-control');
+            const selectedService = serviceSelectForm?.value;
+            const priceDisplayForm = document.querySelector('.price-amount');
+            let quantity;
 
         // Get quantity based on service type
+        const quantityDropdownForm = document.querySelector('#quantity-select');
+        const reportQuantityDropdownForm = document.querySelector('#report-quantity-select');
+        const viewQuantityDropdownForm = document.querySelector('#view-quantity-select');
+        const reactionQuantityDropdownForm = document.querySelector('#reaction-quantity-select');
+
         if (selectedService === '텔레그램 구독자 증가') {
-            quantity = quantityDropdown?.value;
+            quantity = quantityDropdownForm?.value;
             if (!quantity) {
                 showNotification('수량을 선택해주세요.', 'warning');
                 return;
             }
         } else if (selectedService === '텔레그램 신고[채널/그룹]') {
-            quantity = reportQuantityDropdown?.value;
+            quantity = reportQuantityDropdownForm?.value;
             if (!quantity) {
                 showNotification('신고 수량을 선택해주세요.', 'warning');
                 return;
             }
         } else if (selectedService === '텔레그램 조회수 증가') {
-            quantity = viewQuantityDropdown?.value;
+            quantity = viewQuantityDropdownForm?.value;
             if (!quantity) {
                 showNotification('조회수 수량을 선택해주세요.', 'warning');
                 return;
             }
         } else if (selectedService === '텔레그램 랜덤반응 증가') {
-            quantity = reactionQuantityDropdown?.value;
+            quantity = reactionQuantityDropdownForm?.value;
             if (!quantity) {
                 showNotification('반응 수량을 선택해주세요.', 'warning');
                 return;
@@ -364,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
             service: selectedService,
             channel: telegramLink,
             quantity: quantity,
-            price: priceDisplay?.textContent
+            price: priceDisplayForm?.textContent
         };
 
         // Update modal content
@@ -378,6 +390,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Store form data for later use
         window.currentOrderData = formData;
+        } catch (error) {
+            console.error('Error in form submission:', error);
+            showNotification('주문 처리 중 오류가 발생했습니다: ' + error.message, 'error');
+        }
         });
     } else {
         console.error('Order form not found!');
